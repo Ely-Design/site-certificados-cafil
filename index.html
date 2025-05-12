@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gerador de Certificados</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
   <header>
-    <h1>Gerador de Certificados</h1>
-    <p>Preencha os dados abaixo e gere certificados personalizados.</p>
+    <h1>Gerador de Certificados CAFIL</h1>
+    <p>Preencha os dados abaixo e gere os certificados da SRF.</p>
   </header>
 
   <main>
@@ -36,10 +38,15 @@
       </div>
 
       <label for="data">Data (dd/mm/aaaa):</label>
-      <input type="text" id="data" placeholder="12/03/2025" required />
+      <input type="date" id="data" required />
 
       <label for="periodo">Período:</label>
-      <input type="text" id="periodo" value="2025.1" required />
+      <select id="periodo" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+
 
       <label for="horas">Carga horária:</label>
       <input type="number" id="horas" value="8" required />
