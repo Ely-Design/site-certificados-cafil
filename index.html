@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de Certificados</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Gerador de Certificados</h1>
+    <p>Preencha os dados abaixo e gere certificados personalizados.</p>
+  </header>
+
+  <main>
+    <form id="certForm">
+      <label for="nomes">Nomes (um por linha):</label>
+      <textarea id="nomes" rows="6" required></textarea>
+
+      <label for="categoria">Categoria:</label>
+      <select id="categoria">
+        <option value="Ouvinte">Ouvinte</option>
+        <option value="Mediador">Mediador</option>
+        <option value="Palestrante">Palestrante</option>
+        <option value="Monitor SRF">Monitor SRF</option>
+        <option value="Organizador">Organizador</option>
+      </select>
+
+      <div id="extraCampos" style="display: none;">
+        <label for="mesa">Nome da Mesa:</label>
+        <input type="text" id="mesa" />
+
+        <label for="dias">Dias (ex: 1,2,3):</label>
+        <input type="text" id="dias" />
+      </div>
+
+      <label for="data">Data (dd/mm/aaaa):</label>
+      <input type="text" id="data" placeholder="12/03/2025" required />
+
+      <label for="periodo">Período:</label>
+      <input type="text" id="periodo" value="2025.1" required />
+
+      <label for="horas">Carga horária:</label>
+      <input type="number" id="horas" value="8" required />
+
+      <button type="submit">Gerar Certificados</button>
+    </form>
+
+    <section id="resultados">
+      <canvas id="canvas" style="display: none;"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Gerador de Certificados por Pedro Eliahu</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
