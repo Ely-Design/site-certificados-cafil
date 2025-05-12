@@ -1,4 +1,3 @@
-
 const form = document.getElementById("certForm");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -35,12 +34,17 @@ form.addEventListener("submit", async (e) => {
   const periodo = document.getElementById("periodo").value;
   const horas = document.getElementById("horas").value;
   const mesAno = formatarMesAno(data);
+  const ano = data.split("/")[2];
+  const dataExtenso = `${data.split("/")[0]} de ${mesAno}`;
 
   const zip = new JSZip();
   const template = new Image();
 
   template.src = "template.png";
   await new Promise(resolve => template.onload = resolve);
+
+  // Garante carregamento da fonte Lora antes de desenhar
+  await document.fonts.load('24px Lora');
 
   canvas.width = template.width;
   canvas.height = template.height;
@@ -57,12 +61,28 @@ form.addEventListener("submit", async (e) => {
       .replace("{mes_ano}", mesAno)
       .replace("{horas}", horas);
 
-    ctx.font = "24px Arial";
+    // Nome principal
+    ctx.font = "bold 40px Lora";
     ctx.fillStyle = "black";
-    ctx.textAlign = "left";
-    const x = 100, y = 500;
+    ctx.textAlign = "center";
+    ctx.fillText(nome, canvas.width / 2, 450);
 
-    wrapText(ctx, textoBase, x, y, canvas.width - 200, 30);
+    // Texto justificável
+    ctx.font = "24px Lora";
+    ctx.textAlign = "left";
+    wrapText(ctx, textoBase, 100, 500, canvas.width - 200, 30);
+
+    // Data por extenso (inferior direita)
+    ctx.font = "20px Lora";
+    ctx.fillText(dataExtenso, 800, 1000);
+
+    // Ano (inferior esquerda)
+    ctx.font = "20px Lora";
+    ctx.fillText(ano, 200, 1000);
+
+    // Ano e período (topo direita)
+    ctx.font = "bold 40px Lora";
+    ctx.fillText(`${ano}.${periodo}`, 1800, 200);
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
     zip.file(`certificado_${nome}.png`, blob);
