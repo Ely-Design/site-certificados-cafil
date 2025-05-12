@@ -159,7 +159,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   zip.generateAsync({ type: "blob" })
-    .then(content => saveAs(content, "certificados.zip"));
+    .then(content => saveAs(content, categoria+"_"+dia+"-"+mes+"_"+"certificados.zip"));
 });
 
 function wrapText(context, text, x, y, maxWidth, lineHeight) {
