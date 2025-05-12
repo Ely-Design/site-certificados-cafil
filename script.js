@@ -7,14 +7,27 @@ const extraCampos = document.getElementById("extraCampos");
 const categorias = {
   "Ouvinte": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como ouvinte da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
   "Monitor SRF": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como Monitor SRF da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
-  "Mediador": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como mediador(a) da mesa {mesa} da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas.",
-  "Palestrante": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como palestrante na mesa {mesa} da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas.",
-  "Organizador": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como organizador(a) da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, nos dias {dias}, sendo-lhe conferidas {horas} horas."
+  "Monitor Inscriçao": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como Monitor da INSCRIÇÃO DE DISCIPLINAS DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
+  "Mediador": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como mediador(a) da mesa {mesa} da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
+  "Palestrante": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como palestrante na mesa {mesa} da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
+  "Organizador": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como organizador(a) da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, nos dias {dias}, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares."
+};
+
+const horasPorCategoria = {
+  "Ouvinte": "8",
+  "Monitor SRF": "10",
+  "Monitor Inscriçao": "8",
+  "Mediador": "10",
+  "Palestrante": "10",
+  "Organizador": "30"
 };
 
 categoriaSelect.addEventListener("change", () => {
   const valor = categoriaSelect.value;
-  extraCampos.style.display = ["Mediador", "Palestrante", "Organizador"].includes(valor) ? "block" : "none";
+  extraCampos.style.display = ["Organizador"].includes(valor) ? "block" : "none";
+  extraCampos1.style.display = ["Mediador", "Palestrante"].includes(valor) ? "block" : "none";
+  const campoHoras = document.getElementById("horas");
+  campoHoras.value = horasPorCategoria[valor] || "";
 });
 
 function formatarMesAno(dataStr) {
@@ -76,6 +89,13 @@ function wrapTextJustified(ctx, text, x, y, maxWidth, lineHeight) {
   }
 }
 
+const nomesInput = document.getElementById("nomes");
+
+nomesInput.addEventListener("input", () => {
+  // Remove os caracteres "-" e "_"
+  nomesInput.value = nomesInput.value.replace(/[-_]/g, '');
+});
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -118,9 +138,9 @@ form.addEventListener("submit", async (e) => {
       .replace("{horas}", horas);
 
     // Texto justificável
-    ctx.font = "45px Lora";
+    ctx.font = "46px Lora";
     ctx.textAlign = "left";
-    wrapTextJustified(ctx, textoBase, 235, 870, canvas.width - 400, 80);
+    wrapTextJustified(ctx, textoBase, 235, 870, canvas.width - 475, 85);
 
     // Data por extenso (inferior direita)
     ctx.font = "35px Lora";
@@ -131,7 +151,7 @@ form.addEventListener("submit", async (e) => {
     ctx.fillText(ano, 570, 1493);
 
     // Ano e período (topo direita)
-    ctx.font = "bold 82px Lora";
+    ctx.font = "bold 83px Lora";
     ctx.fillText(`${ano}.${periodo}`, 1900, 587);
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
