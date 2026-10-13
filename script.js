@@ -6,7 +6,7 @@ const extraCampos = document.getElementById("extraCampos");
 
 const categorias = {
   "Ouvinte": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como ouvinte da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
-  "Monitor SRF": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como Monitor SRF da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
+  "Monitor SRF": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como Monitor SRF da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {data_extenso} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
   "Monitor Inscriçao": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como Monitor da INSCRIÇÃO DE DISCIPLINAS DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
   "Mediador": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como mediador(a) da mesa {mesa} da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
   "Palestrante": "Declaramos, para fins de instruir curriculum vitae, que {nome} participou como palestrante na mesa {mesa} da SEMANA DE RECEPÇÃO DE CALOUROS {periodo} realizada em {mes_ano} no Instituto de Filosofia e Ciências Sociais - IFCS/UFRJ, sendo-lhe conferidas {horas} horas de atividades acadêmicas extracurriculares.",
@@ -135,6 +135,7 @@ form.addEventListener("submit", async (e) => {
       .replace("{dias}", dias)
       .replace("{periodo}", ano+"."+periodo)
       .replace("{mes_ano}", mesAno)
+      .replace("{data_extenso}", dataExtenso)
       .replace("{horas}", horas);
 
     // Texto justificável
